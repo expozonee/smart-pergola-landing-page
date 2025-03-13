@@ -9,6 +9,9 @@ import { formSchema } from "@/schema/formSchema";
 import { FormFieldCreator } from "../FormFieldCreator/FormFieldCreator";
 import { landingFormInputs } from "./landingFormInputs";
 import { DEFAULT_VALUES } from "./defaultValues";
+import { Customer } from "@/db/customers";
+import { addCustomerToDb } from "@/db/addCustomerToDb";
+import { Timestamp } from "firebase/firestore";
 
 type LandingFormProps = {
   isCampaignConfigured: boolean;
@@ -19,7 +22,7 @@ export function LandingForm({
   isCampaignConfigured,
   campaignName,
 }: LandingFormProps) {
-  const [showAlert, setShowAlert, SuccessAlert] = useAlert();
+  const [showAlert, setShowAlert, AlertMessage] = useAlert();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -30,11 +33,23 @@ export function LandingForm({
     const customerData = {
       ...values,
       campaignName,
-    };
+      dateAdded: Timestamp.now(),
+    } as Customer;
 
-    console.log(customerData);
-    setShowAlert(true);
-    form.reset(DEFAULT_VALUES);
+    try {
+      await addCustomerToDb(customerData);
+      setShowAlert({
+        show: true,
+        type: "success",
+      });
+      form.reset(DEFAULT_VALUES);
+    } catch (error) {
+      console.error(error);
+      setShowAlert({
+        show: true,
+        type: "error",
+      });
+    }
   }
 
   return (
@@ -51,67 +66,6 @@ export function LandingForm({
               />
             );
           })}
-
-          {/* <FormFieldCreator form={form} title={"שם משפחה"} name="lastName" />
-          <FormFieldCreator
-            form={form}
-            title={"מס' טלפון"}
-            name="phoneNumber"
-          />
-          <FormFieldCreator form={form} title={"עיר"} name="city" /> */}
-
-          {/* <FormField
-            control={form.control}
-            name="firstName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-md font-medium">שם פרטי</FormLabel>
-                <FormControl>
-                  <Input placeholder="שם פרטי" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="lastName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-md font-medium">שם משפחה</FormLabel>
-                <FormControl>
-                  <Input placeholder="שם משפחה" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="phoneNumber"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-md font-medium">מס' טלפון</FormLabel>
-                <FormControl>
-                  <Input placeholder="מס' טלפון" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="city"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-md font-medium">עיר</FormLabel>
-                <FormControl>
-                  <Input placeholder="עיר" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
           <Button
             className="w-full bg-primary hover:bg-secondary"
             type="submit"
@@ -121,7 +75,11 @@ export function LandingForm({
           </Button>
         </form>
       </Form>
-      <div className="mt-6">{showAlert && <SuccessAlert />}</div>
+      <div className="mt-6">
+        {showAlert.show && (
+          <AlertMessage type={showAlert.type} message={showAlert.message} />
+        )}
+      </div>
     </div>
   );
 }
