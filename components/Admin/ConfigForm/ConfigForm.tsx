@@ -9,19 +9,33 @@ import { configSchema } from "@/schema/configSchema";
 import { DEFAULT_VALUES } from "./defaultValues";
 import { FormFieldCreator } from "../../FormFieldCreator/FormFieldCreator";
 import { configFormInputs } from "./configFormInputs";
+import { LandingPageConfiguration } from "@/db/configureLandingPage";
 
 export function ConfigForm() {
-  const [showAlert, setShowAlert, SuccessAlert] = useAlert();
+  const [showAlert, setShowAlert, AlertMessage] = useAlert();
 
   const form = useForm<z.infer<typeof configSchema>>({
     resolver: zodResolver(configSchema),
     defaultValues: DEFAULT_VALUES,
   });
 
-  function onSubmit(values: z.infer<typeof configSchema>) {
-    console.log(values);
-    setShowAlert(true);
-    form.reset(DEFAULT_VALUES);
+  async function onSubmit(values: z.infer<typeof configSchema>) {
+    const { updateConfig } = await LandingPageConfiguration();
+    try {
+      await updateConfig(values.campaignName);
+      setShowAlert({
+        show: true,
+        type: "success",
+      });
+      form.reset(DEFAULT_VALUES);
+    } catch (error) {
+      console.error(error);
+      setShowAlert({
+        show: true,
+        type: "error",
+        message: error,
+      });
+    }
   }
 
   return (
@@ -48,7 +62,11 @@ export function ConfigForm() {
           </Button>
         </form>
       </Form>
-      <div className="mt-6">{showAlert && <SuccessAlert />}</div>
+      <div className="mt-6">
+        {showAlert.show && (
+          <AlertMessage type={showAlert.type} message={showAlert.message} />
+        )}
+      </div>
     </div>
   );
 }
