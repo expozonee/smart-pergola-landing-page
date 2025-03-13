@@ -1,7 +1,6 @@
 import { ADMIN_BUTTONS_DATA } from "@/components/Admin/AdminButtons/adminButtons";
 import { ConfigForm } from "@/components/Admin/ConfigForm/ConfigForm";
 import { NamesDashboard } from "@/components/NamesDashboard";
-import { LandingPageConfiguration } from "@/db/configureLandingPage";
 import { convertToSlug } from "@/utils/convertToSlug";
 import { notFound } from "next/navigation";
 import { use } from "react";
@@ -16,8 +15,6 @@ type SectionPageProps = {
 
 export default function SectionPage({ params }: SectionPageProps) {
   const section = use(params).section;
-  const config = use(LandingPageConfiguration());
-
   if (!ALLOWED_PATHS.includes(section)) notFound();
 
   return (
