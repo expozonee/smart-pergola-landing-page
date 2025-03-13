@@ -1,5 +1,4 @@
 "use client";
-import { User } from "@/types/User";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import { ArrowUpDown } from "lucide-react";
@@ -9,12 +8,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Customer } from "@/db/customers";
+import { CustomerDisplay } from "@/db/customers";
 
-export const columns: ColumnDef<Customer>[] = [
+export const columns: ColumnDef<CustomerDisplay>[] = [
   {
     accessorKey: "fullName",
     header: "Full Name",
@@ -26,7 +24,6 @@ export const columns: ColumnDef<Customer>[] = [
   },
   {
     accessorKey: "date",
-    // header: "Date",
     header: ({ column }) => {
       return (
         <Button
@@ -52,6 +49,10 @@ export const columns: ColumnDef<Customer>[] = [
         </Button>
       );
     },
+  },
+  {
+    accessorKey: "campaignName",
+    header: "Campign Name",
   },
   {
     id: "actions",
