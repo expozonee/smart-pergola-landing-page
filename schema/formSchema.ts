@@ -2,8 +2,7 @@ import { z } from "zod";
 import { isMobilePhone } from "validator";
 
 export const formSchema = z.object({
-  firstName: z.string().min(1, { message: "שם חובה" }),
-  lastName: z.string().min(1, { message: "שם משפחה חובה" }),
+  fullName: z.string().min(1, { message: "שם מלא חובה" }),
   phoneNumber: z
     .string()
     .min(1, "מספר טלפון חובה")
