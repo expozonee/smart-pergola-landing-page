@@ -1,37 +1,36 @@
 import { convertDate } from "@/utils/convertDate";
 import { db } from "./db";
-import { collection, getDocs, addDoc, Timestamp } from "firebase/firestore";
+import { collection, getDocs, Timestamp } from "firebase/firestore";
 
 export type Customer = {
   fullName: string;
   phoneNumber: string;
   city: string;
+  dateAdded: Timestamp;
+  campaignName: string;
+};
+
+export type CustomerDisplay = Omit<Customer, "dateAdded"> & {
   date: string;
 };
 
-const customersCollection = collection(db, "customers");
+export const customersCollection = collection(db, "customers");
 
 export async function customers() {
-  // await addDoc(customersCollection, {
-  //   fullName: "Walter",
-  //   phoneNumber: "0548888888",
-  //   city: "Haifa",
-  //   dateAdded: Timestamp.fromDate(new Date("2024-11-01T00:00:00Z")),
-  // });
-
-  let years: number[] = [];
+  const years: number[] = [];
   const customersSnapShot = await getDocs(customersCollection);
   const customers = customersSnapShot.docs.map((customer) => {
-    const date = new Date(customer.get("dateAdded").seconds * 1000);
-
+    const date = customer.get("dateAdded").toDate();
     if (!years.includes(date.getFullYear())) years.push(date.getFullYear());
+
     return {
       fullName: customer.get("fullName"),
       phoneNumber: customer.get("phoneNumber"),
       city: customer.get("city"),
+      campaignName: customer.get("campaignName"),
       date: convertDate(date),
     };
-  }) as Customer[];
+  }) as CustomerDisplay[];
 
   return { customers, years };
 }
