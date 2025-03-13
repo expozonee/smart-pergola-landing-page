@@ -7,12 +7,8 @@ type LandingFormInputs = {
 
 export const landingFormInputs: LandingFormInputs[] = [
   {
-    name: "firstName",
+    name: "fullName",
     title: "שם פרטי",
-  },
-  {
-    name: "lastName",
-    title: "שם משפחה",
   },
   {
     name: "phoneNumber",
