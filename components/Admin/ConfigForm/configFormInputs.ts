@@ -7,11 +7,7 @@ type ConfigFormInput = {
 
 export const configFormInputs: ConfigFormInput[] = [
   {
-    name: "title",
+    name: "campaignName",
     title: "שם",
   },
-  // {
-  //   name: "year",
-  //   title: "שנה",
-  // },
 ];
