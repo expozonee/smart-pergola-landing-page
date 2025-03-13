@@ -9,11 +9,11 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { SideBarMenuItem } from "./components/SideBarMenuItem";
-import { ADMIN_BUTTONS_DATA } from "../AdminButtons/adminButtons";
 import { LandingPageConfiguration } from "@/db/configureLandingPage";
 import { adminButtonObjCreator } from "@/utils/adminButtonObjCreator";
+import { ADMIN_BUTTONS_DATA } from "../AdminButtons/adminButtons";
 
-const adminButtons = ADMIN_BUTTONS_DATA.map((data) =>
+const adminButtons = ADMIN_BUTTONS_DATA?.map((data) =>
   adminButtonObjCreator(data.name, data.type)
 );
 
@@ -45,7 +45,9 @@ export async function AdminSideBar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        <h2>Configure status: {isCampaignConfigured ? "True" : "False"}</h2>
+        <h2 className="mx-auto">
+          Configure status: {isCampaignConfigured ? "True" : "False"}
+        </h2>
       </SidebarContent>
     </Sidebar>
   );
