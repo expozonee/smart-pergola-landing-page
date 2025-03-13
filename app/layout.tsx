@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Heebo } from "next/font/google";
+import { Heebo } from "next/font/google";
 import "./globals.css";
 
 const heebo = Heebo({ subsets: ["hebrew"], weight: ["300", "500", "700"] });
