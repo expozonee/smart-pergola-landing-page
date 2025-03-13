@@ -1,6 +1,5 @@
 export const DEFAULT_VALUES = {
-  firstName: "",
-  lastName: "",
+  fullName: "",
   phoneNumber: "",
   city: "",
 };
