@@ -11,13 +11,13 @@ type ConfigType = {
   date: Timestamp;
   name: string;
 };
-const configCollection = collection(db, "configration");
+const configCollection = collection(db, "config");
 
 export async function LandingPageConfiguration() {
   const config = await getDocs(configCollection);
   const configData = config.docs[0].data() as ConfigType;
   const docId = config.docs[0].id;
-  const configRef = doc(db, "configration", docId);
+  const configRef = doc(db, "config", docId);
 
   //   update the config
   async function updateConfig(name: string) {
