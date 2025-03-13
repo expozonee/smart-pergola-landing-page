@@ -3,4 +3,5 @@ export type User = {
   phoneNumber: string;
   date: string;
   city: string;
+  campaignName: string;
 };
