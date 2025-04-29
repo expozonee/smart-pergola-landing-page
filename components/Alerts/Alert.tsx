@@ -1,8 +1,12 @@
 import { CircleCheck } from "lucide-react";
-import type { AlertState } from "@/hooks/useAlert";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 
-export function AlertMessage({ type, message }: AlertState) {
+export type AlertMessageProps = {
+  type: "success" | "error";
+  message?: unknown | string | undefined;
+};
+
+export function AlertMessage({ type, message }: AlertMessageProps) {
   return (
     <Alert
       className="flex items-center gap-3"
@@ -13,7 +17,7 @@ export function AlertMessage({ type, message }: AlertState) {
         {type === "success"
           ? "הבקשה שלך התקבלה בהצלחה!"
           : type === "error" && message
-          ? `שגיאה!: ${message}`
+          ? `שגיאה! ${message}`
           : "שגיאה!"}
       </AlertTitle>
     </Alert>
