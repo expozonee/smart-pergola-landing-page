@@ -21,8 +21,6 @@ const adminButtons = ADMIN_BUTTONS_DATA?.map((data) =>
 
 export async function AdminSideBar() {
   const userAuth = await auth();
-  console.log(userAuth);
-
   const { isCampaignConfigured } = await LandingPageConfiguration();
 
   return (
