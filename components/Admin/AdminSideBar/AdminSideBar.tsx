@@ -12,12 +12,17 @@ import { SideBarMenuItem } from "./components/SideBarMenuItem";
 import { LandingPageConfiguration } from "@/db/configureLandingPage";
 import { adminButtonObjCreator } from "@/utils/adminButtonObjCreator";
 import { ADMIN_BUTTONS_DATA } from "../AdminButtons/adminButtons";
+import { auth } from "@/auth";
+import { UserSectionSideBar } from "./UserSection";
 
 const adminButtons = ADMIN_BUTTONS_DATA?.map((data) =>
   adminButtonObjCreator(data.name, data.type)
 );
 
 export async function AdminSideBar() {
+  const userAuth = await auth();
+  console.log(userAuth);
+
   const { isCampaignConfigured } = await LandingPageConfiguration();
 
   return (
@@ -48,6 +53,8 @@ export async function AdminSideBar() {
         <h2 className="mx-auto">
           Configure status: {isCampaignConfigured ? "True" : "False"}
         </h2>
+        {<h2>Hi {userAuth?.user?.username}</h2>}
+        <UserSectionSideBar />
       </SidebarContent>
     </Sidebar>
   );
