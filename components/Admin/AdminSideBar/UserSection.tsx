@@ -17,7 +17,7 @@ export function UserSectionSideBar() {
 
   return (
     <Button className="w-5/6 mx-auto bg-red-600" onClick={handleClick}>
-      Sign out
+      התנתק
     </Button>
   );
 }
