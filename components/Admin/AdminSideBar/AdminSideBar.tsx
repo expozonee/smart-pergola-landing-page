@@ -16,7 +16,7 @@ import { auth } from "@/auth";
 import { UserSectionSideBar } from "./UserSection";
 
 const adminButtons = ADMIN_BUTTONS_DATA?.map((data) =>
-  adminButtonObjCreator(data.name, data.type)
+  adminButtonObjCreator(data.name, data.type, data.hebrew_name)
 );
 
 export async function AdminSideBar() {
@@ -38,7 +38,7 @@ export async function AdminSideBar() {
         </Link>
         <SidebarGroup>
           <SidebarGroupLabel className="text-white">
-            Admin Panel
+            לוח ניהול
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -48,10 +48,14 @@ export async function AdminSideBar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        <h2 className="mx-auto">
-          Configure status: {isCampaignConfigured ? "True" : "False"}
+        <h2 className="mx-auto mt-8">
+          סטטוס : {isCampaignConfigured ? "מוגדר" : "לא מוגדר"}
         </h2>
-        {<h2>Hi {userAuth?.user?.username}</h2>}
+        {
+          <h2 className="mx-auto mt-4">
+            שלום {userAuth?.user?.username === "moatasem" ? "מועתסם" : ""}
+          </h2>
+        }
         <UserSectionSideBar />
       </SidebarContent>
     </Sidebar>

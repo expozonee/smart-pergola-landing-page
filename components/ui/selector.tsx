@@ -56,7 +56,10 @@ export function SelectScrollable<TData>(props: SelectorProps<TData>) {
         }}
       >
         <SelectTrigger className="w-[280px] bg-white text-black">
-          <SelectValue placeholder={`Select a ${title}`} className="w-[30%]" />
+          <SelectValue
+            placeholder={`בחר ${title === "month" ? "חודש" : "שנה"}`}
+            className="w-[30%]"
+          />
         </SelectTrigger>
         <SelectContent>
           {title === "month"
