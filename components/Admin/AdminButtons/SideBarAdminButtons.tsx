@@ -1,20 +1,20 @@
 import { Dispatch, SetStateAction } from "react";
-import { adminButtonObjCreator } from "@/utils/adminButtonObjCreator";
+// import { adminButtonObjCreator } from "@/utils/adminButtonObjCreator";
 
-const ADMIN_BUTTONS = [
-  adminButtonObjCreator("Landing Page Config", "config"),
-  adminButtonObjCreator("Names List", "names"),
-];
+// const ADMIN_BUTTONS = [
+//   adminButtonObjCreator("Landing Page Config", "config"),
+//   adminButtonObjCreator("Names List", "names"),
+// ];
 
 type AdminButtonsProps = {
   type: string;
   setType: Dispatch<SetStateAction<string>>;
 };
 
-export function AdminButtons({ type, setType }: AdminButtonsProps) {
+export function AdminButtons({}: AdminButtonsProps) {
   return (
     <section className="w-[50%] mx-auto flex gap-6 justify-center mt-10">
-      {ADMIN_BUTTONS.map((button, index) => {
+      {/* {ADMIN_BUTTONS.map((button, index) => {
         return (
           <button
             key={index}
@@ -26,7 +26,7 @@ export function AdminButtons({ type, setType }: AdminButtonsProps) {
             {button.name}
           </button>
         );
-      })}
+      })} */}
     </section>
   );
 }

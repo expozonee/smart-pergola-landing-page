@@ -1,8 +1,7 @@
 import Link from "next/link";
 import * as react from "react";
 import { LucideProps } from "lucide-react";
-import { SidebarMenuItem, SidebarMenuButton } from "@/components/ui/sidebar";
-import { headers } from "next/headers";
+import { SidebarMenuItem } from "@/components/ui/sidebar";
 import { SidebarMenuButtonClient } from "./SideBarMenuButtonClient";
 
 type SideBarMenuItemProps = {
