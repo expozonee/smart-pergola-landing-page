@@ -15,5 +15,9 @@ export function UserSectionSideBar() {
     }
   }
 
-  return <Button onClick={handleClick}>Sign out</Button>;
+  return (
+    <Button className="w-5/6 mx-auto bg-red-600" onClick={handleClick}>
+      Sign out
+    </Button>
+  );
 }

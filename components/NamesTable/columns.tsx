@@ -15,12 +15,12 @@ import { CustomerDisplay } from "@/db/customers";
 export const columns: ColumnDef<CustomerDisplay>[] = [
   {
     accessorKey: "fullName",
-    header: "Full Name",
+    header: "שם מלא",
   },
 
   {
     accessorKey: "phoneNumber",
-    header: "Phone Number",
+    header: "מספר טלפון",
   },
   {
     accessorKey: "date",
@@ -30,7 +30,7 @@ export const columns: ColumnDef<CustomerDisplay>[] = [
           variant={"ghost"}
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Date
+          תאריך
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -44,7 +44,7 @@ export const columns: ColumnDef<CustomerDisplay>[] = [
           variant={"ghost"}
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          City
+          עיר
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -52,7 +52,7 @@ export const columns: ColumnDef<CustomerDisplay>[] = [
   },
   {
     accessorKey: "campaignName",
-    header: "Campign Name",
+    header: "שם הקמפיין",
   },
   {
     id: "actions",
@@ -63,16 +63,16 @@ export const columns: ColumnDef<CustomerDisplay>[] = [
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
+              <span className="sr-only">פתח תפריט</span>
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuContent align="center">
+            <DropdownMenuLabel>פעולות</DropdownMenuLabel>
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(phoneNumber)}
             >
-              Copy Phone Number
+              העתק מספר טלפון
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

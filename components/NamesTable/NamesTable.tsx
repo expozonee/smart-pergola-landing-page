@@ -63,7 +63,7 @@ export function NamesTable<TData, TValue>({
       <section className="flex justify-center items-center gap-6 w-full">
         <div className="flex  w-full gap-2 flex-col [&>*]:w-full md:flex-row items-center py-4 lg:[&>*]:w-[35%]">
           <Input
-            placeholder="Filter cities..."
+            placeholder="סינון עיר..."
             value={(table.getColumn("city")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
               table.getColumn("city")?.setFilterValue(event.target.value)
@@ -171,7 +171,7 @@ export function NamesTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results
+                  איו תוצאות
                 </TableCell>
               </TableRow>
             )}
@@ -187,7 +187,7 @@ export function NamesTable<TData, TValue>({
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          Previous
+          אחורה
         </Button>
         <Button
           variant="outline"
@@ -195,7 +195,7 @@ export function NamesTable<TData, TValue>({
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          Next
+          קדימה
         </Button>
       </div>
     </div>
