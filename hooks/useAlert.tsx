@@ -1,6 +1,4 @@
-import { AlertMessage } from "@/components/Alerts/Alert";
-// import { ErrorAlert } from "@/components/Alerts/ErrorAlert";
-// import { SuccessAlert } from "@/components/Alerts/SucessAlert";
+import { AlertMessage, AlertMessageProps } from "@/components/Alerts/Alert";
 import { Dispatch, JSX, SetStateAction, useEffect, useState } from "react";
 
 export type AlertState = {
@@ -30,6 +28,6 @@ export function useAlert() {
   return [showAlert, setShowAlert, AlertMessage] as [
     AlertState,
     Dispatch<SetStateAction<AlertState>>,
-    ({ type, message }: Omit<AlertState, "show">) => JSX.Element
+    ({ type, message }: AlertMessageProps) => JSX.Element
   ];
 }
