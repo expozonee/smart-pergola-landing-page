@@ -19,12 +19,29 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const appCheck = initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider(
-    process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!
-  ),
-  isTokenAutoRefreshEnabled: true,
-});
+// const appCheck = initializeAppCheck(app, {
+//   provider: new ReCaptchaV3Provider(
+//     process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!
+//   ),
+//   isTokenAutoRefreshEnabled: true,
+// });
+
+// ——— Dynamic App Check init ———
+if (typeof window !== "undefined") {
+  (async () => {
+    const { initializeAppCheck, ReCaptchaV3Provider } = await import(
+      "firebase/app-check"
+    );
+    initializeAppCheck(app, {
+      provider: new ReCaptchaV3Provider(
+        process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!
+      ),
+      isTokenAutoRefreshEnabled: true,
+    });
+    console.log("[Firebase][app-check] initialized");
+  })();
+}
+
 export const db = getFirestore(app);
 
 export const isConfigured = true;
